@@ -1,15 +1,31 @@
 import React from 'react';
-import Dropzone from 'react-dropzone';
+import Uppy from 'uppy/lib/core';
+import DragDrop from 'uppy/lib/react/DragDrop';
 
-const onDrop = (acceptedFiles) => {
-  console.log(acceptedFiles);
-};
+const uppy = Uppy({
+  meta: {type: 'avatar'},
+  restrictions: {maxNumberOfFiles: 1},
+  autoProceed: true,
+});
+
+uppy.on('complete', (result) => {
+  console.log(result);
+});
+
+uppy.run()
 
 const Vision = () =>
   (
-    <Dropzone
-      onDrop={onDrop}
-    />
+    <div>
+      <DragDrop
+        uppy={uppy}
+        locale={{
+          strings: {
+            chooseFile: 'Pick a new avatar',
+          },
+        }}
+      />
+    </div>
   );
 
 export default Vision;
