@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const webpack = require('webpack')
 const HappyPack = require('happypack')
+const Dotenv = require('dotenv-webpack')
 
 module.exports = {
   mode: "development",
@@ -77,6 +78,9 @@ module.exports = {
           },
         },
       ],
+    }),
+    new Dotenv({
+      safe: true,
     }),
   ],
   devServer: {

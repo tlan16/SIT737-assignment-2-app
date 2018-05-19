@@ -21,3 +21,6 @@ yarn.lock
 
 # ESLint
 .eslintcache
+
+# Environment Files
+/.env
