@@ -16,7 +16,7 @@
       }
     ],
     "semi": [
-      1,
+      "error",
       "never"
     ],
     "import/order": [
