@@ -1,7 +1,7 @@
 import React from 'react'
 import 'uppy/dist/uppy.css'
 import Uppy from 'uppy/lib/core'
-import Tus from 'uppy/lib/plugins/Tus'
+import XHRUpload from 'uppy/lib/plugins/XHRUpload'
 import {ProgressBar, DragDrop} from 'uppy/lib/react'
 
 class MyUppy extends React.Component {
@@ -16,7 +16,7 @@ class MyUppy extends React.Component {
     this.uppy = new Uppy({
       id: 'uppy',
       debug: true,
-      autoProceed: false,
+      autoProceed: true,
       maxFileSize: 1000000, // 1MB
       maxNumberOfFiles: 1,
       minNumberOfFiles: 1,
@@ -24,7 +24,16 @@ class MyUppy extends React.Component {
     })
 
     this.uppy
-      .use(Tus, {endpoint: 'https://master.tus.io/files/'})
+      .use(XHRUpload, {
+        endpoint: `${process.env.API_URL}/vision/label`,
+        method: 'post',
+        formData: true,
+        fieldName: 'image',
+        bundle: true,
+        getResponseData: (responseText) => {
+          console.log(`Response Data`, JSON.parse(responseText))
+        },
+      })
 
     this.uppy
       .on('file-added', (file) => {
