@@ -1,8 +1,8 @@
+const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const webpack = require('webpack')
 const HappyPack = require('happypack')
-const path = require('path')
 
 module.exports = {
   mode: "development",
@@ -55,6 +55,9 @@ module.exports = {
         ],
       },
     ],
+  },
+  resolve: {
+    extensions: ['*', '.js', '.jsx'],
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),

@@ -1,6 +1,7 @@
 {
   "plugins": [
-    "import"
+    "import",
+    "react"
   ],
   "rules": {
     "comma-dangle": [
@@ -19,15 +20,13 @@
       "never"
     ],
     "import/order": [
+      "error"
+    ],
+    "react/jsx-filename-extension": [
       "error",
       {
-        "groups": [
-          "index",
-          "sibling",
-          "parent",
-          "internal",
-          "external",
-          "builtin"
+        "extensions": [
+          ".jsx"
         ]
       }
     ]
