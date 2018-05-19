@@ -1,29 +1,36 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
+  "name": "startover",
+  "version": "1.0.0",
   "private": true,
-  "dependencies": {
-    "airbnb-browser-shims": "^2.1.0",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "react-images-upload": "^1.0.7",
-    "react-scripts": "1.1.4",
-    "styled-components": "^3.2.6",
-    "uppy": "^0.24.4"
-  },
+  "license": "MIT",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch",
+    "start": "webpack-dev-server",
+    "build": "webpack --mode production"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.3",
-    "babel-preset-airbnb": "^2.4.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "cache-loader": "^1.2.2",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^0.28.11",
+    "csv-loader": "^2.1.1",
     "eslint": "^4.19.1",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.11.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.8.2"
+    "eslint-plugin-import": "^2.12.0",
+    "file-loader": "^1.1.11",
+    "happypack": "^5.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3",
+    "webpack-dev-server": "^3.1.4",
+    "xml-loader": "^1.2.1"
+  },
+  "dependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
   }
 }

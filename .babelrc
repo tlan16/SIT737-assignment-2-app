@@ -1,12 +1,12 @@
 {
   "presets": [
     [
-      "airbnb",
+      "env",
       {
         "targets": {
-          "chrome": 50,
-          "explorer": 11,
-          "firefox": 45
+          "browsers": [
+            "defaults"
+          ]
         }
       }
     ]
