@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import App from './components/App'
 import './styles.sass'
 import 'font-awesome/css/font-awesome.css'
+import 'bootstrap/dist/css/bootstrap.css'
 
 const reactContainerId = 'react-root'
 

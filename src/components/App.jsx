@@ -1,14 +1,13 @@
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.css'
 import Title from './Title'
-import Uppy from './Uppy'
+import Vision from './Vision/Vision'
 
 class App extends React.Component {
   render() {
     return (
       <div className={'container'}>
         <Title />
-        <Uppy />
+        <Vision />
       </div>
     )
   }

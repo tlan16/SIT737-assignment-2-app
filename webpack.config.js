@@ -14,7 +14,7 @@ module.exports = {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
-  devtool: "eval",
+  devtool: "eval-source-map",
   module: {
     rules: [
       {
@@ -72,10 +72,6 @@ module.exports = {
       loaders: [
         {
           loader: 'babel-loader',
-          query: {
-            presets: ['env', 'react'],
-            compact: false,
-          },
         },
       ],
     }),
