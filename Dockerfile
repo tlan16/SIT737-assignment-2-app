@@ -5,7 +5,7 @@ ADD . .
 
 RUN npm install --quiet --loglevel=error
 
-EXPOSE 5000
+EXPOSE 8080
 
 RUN ["npm", "run", "build"]
 
