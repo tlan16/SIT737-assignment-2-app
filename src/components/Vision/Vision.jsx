@@ -1,6 +1,7 @@
 import React from 'react'
 import {Grid, Row, Col} from 'react-bootstrap'
 import Uppy from '../Uppy'
+import {getUppyXHRUpload} from '../../services/vision'
 import Bar from './ResultBar'
 
 class Vision extends React.Component {
@@ -8,22 +9,15 @@ class Vision extends React.Component {
     visionResult: [],
   }
 
-  XHRUpload = {
-    endpoint: `${process.env.API_URL}/vision/label`,
-    method: 'post',
-    formData: true,
-    fieldName: 'image',
-    bundle: true,
-    getResponseData: (responseText) => {
-      try {
-        this.setState({
-          visionResult: JSON.parse(responseText),
-        })
-      } catch (e) {
-        console.error('cannot parse result as JSON')
-      }
-    },
-  }
+  XHRUpload = getUppyXHRUpload((responseText) => {
+    try {
+      this.setState({
+        visionResult: JSON.parse(responseText),
+      })
+    } catch (e) {
+      console.error('cannot parse result as JSON')
+    }
+  })
 
   static generateResultBars(results = []) {
     return results.map(result =>
