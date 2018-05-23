@@ -5,8 +5,8 @@ import {codeToName} from '../../helpers/languageCode'
 import {getVoices} from "../../services/tts"
 
 class VoiceSelector extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     getVoices(res => {
       this.setState(this.formatVoiceOptions(res))
     })
@@ -51,15 +51,21 @@ class VoiceSelector extends React.Component {
     options: [],
   }
 
+  onchange = ({value}, {action}) => {
+    if (action === 'select-option' && this.props.onSelectOption instanceof Function)
+      this.props.onSelectOption(value)
+  }
+
   render() {
     return (
       <InputGroup>
         <InputGroup.Addon>
-          Voice
+          Select a Voice
         </InputGroup.Addon>
         <Select
           options={this.state.options}
           defaultValue={this.state.defaultValue}
+          onChange={this.onchange}
         />
       </InputGroup>
     )
