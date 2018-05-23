@@ -10,10 +10,12 @@ class MyUppy extends React.Component {
       id: 'uppy',
       debug: process.env.NODE_ENV !== 'production',
       autoProceed: true,
-      maxFileSize: 1000000, // 1MB
-      maxNumberOfFiles: 1,
-      minNumberOfFiles: 1,
-      allowedFileTypes: ['.jpg', '.jpeg', '.png', '.gif'],
+      restrictions: {
+        maxFileSize: 1000000, // 1MB
+        maxNumberOfFiles: 1,
+        minNumberOfFiles: 1,
+        allowedFileTypes: ['.jpg', '.jpeg', '.png', '.gif'],
+      },
     })
 
     this.uppy
