@@ -1,5 +1,6 @@
 import React from 'react'
 import {Grid, Row, Col} from 'react-bootstrap'
+import {Transition, animated} from 'react-spring'
 import Uppy from '../Uppy'
 import {getUppyXHRUpload} from '../../services/vision'
 import Bar from './ResultBar'
@@ -20,13 +21,28 @@ class Vision extends React.Component {
   })
 
   generateResultBars = (results = []) => {
-    return results.map(({mid, score, description}) =>
-      <Bar
-        key={mid}
-        now={score}
-        label={description}
-        voice={this.props.voice}
-      />
+    const myStyles = {
+      'margin-bottom': '20px',
+    }
+
+    return (
+      <Transition
+        native
+        keys={results.map(item => item.mid)}
+        from={{opacity: 0, height: 0}}
+        enter={{opacity: 1, height: 20}}
+        leave={{opacity: 0, height: 0}}>
+        {results.map(item => styles =>
+          <animated.div style={{...myStyles, ...styles}}>
+            <Bar
+              key={item.mid}
+              now={item.score}
+              label={item.description}
+              voice={this.props.voice}
+            />
+          </animated.div>
+        )}
+      </Transition>
     )
   }
 
