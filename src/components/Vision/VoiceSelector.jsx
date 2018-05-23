@@ -66,6 +66,8 @@ class VoiceSelector extends React.Component {
           options={this.state.options}
           defaultValue={this.state.defaultValue}
           onChange={this.onchange}
+          isDisabled={this.props.isDisabled}
+          autoFocus={true}
         />
       </InputGroup>
     )

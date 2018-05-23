@@ -18,7 +18,10 @@ class App extends React.Component {
     return (
       <div className={'container'}>
         <Title />
-        <VoiceSelector onSelectOption={this.onVoiceSelected} />
+        <VoiceSelector
+          onSelectOption={this.onVoiceSelected}
+          isDisabled={this.state.voice}
+        />
         {this.state.voice ? <Vision voice={this.state.voice} /> : undefined}
       </div>
     )
