@@ -35,6 +35,7 @@ class MyUppy extends React.Component {
         console.log(file.id, progress.bytesUploaded, progress.bytesTotal)
       })
       .on('upload-success', (file, resp, uploadURL) => {
+        this.props.onUppySuccess(this.uppy, file)
         console.log(`Upload successful`, file.name, uploadURL)
       })
       .on('complete', (result) => {

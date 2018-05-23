@@ -8,6 +8,14 @@ import Bar from './ResultBar'
 class Vision extends React.Component {
   state = {
     visionResult: [],
+    previewImage: '',
+  }
+
+  styles = {
+    previewImage: {
+      maxHeight: '200px',
+      maxWidth: '200px',
+    },
   }
 
   XHRUpload = getUppyXHRUpload((responseText) => {
@@ -19,6 +27,20 @@ class Vision extends React.Component {
       console.error('cannot parse result as JSON')
     }
   })
+
+  onUppySuccess = (uppy, file) => {
+    const reader = new FileReader()
+
+    reader.addEventListener("load", () => {
+      this.setState({
+        previewImage: reader.result,
+      })
+    }, false)
+
+    reader.readAsDataURL(file.data)
+
+    uppy.reset()
+  }
 
   generateResultBars = (results = []) => {
     const myStyles = {
@@ -54,8 +76,13 @@ class Vision extends React.Component {
             <h3>Vision Analysis</h3>
           </Col>
           <Col xs={6}>
+            <img
+              src={this.state.previewImage}
+              style={this.styles.previewImage}
+            />
             <Uppy
               XHRUpload={this.XHRUpload}
+              onUppySuccess={this.onUppySuccess}
             />
           </Col>
           <Col xs={6}>
