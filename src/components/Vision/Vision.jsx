@@ -1,5 +1,6 @@
 import React from 'react'
 import {Grid, Row, Col} from 'react-bootstrap'
+import Loadable from 'react-loading-overlay'
 import {Transition, animated} from 'react-spring'
 import Uppy from '../Uppy'
 import {getUppyXHRUpload} from '../../services/vision'
@@ -9,6 +10,7 @@ class Vision extends React.Component {
   state = {
     visionResult: [],
     previewImage: '',
+    isLoading: false,
   }
 
   styles = {
@@ -40,6 +42,15 @@ class Vision extends React.Component {
     reader.readAsDataURL(file.data)
 
     uppy.reset()
+    this.setState({
+      isLoading: false,
+    })
+  }
+
+  onUppyUpload = uppy => {
+    this.setState({
+      isLoading: true,
+    })
   }
 
   generateResultBars = (results = []) => {
@@ -70,26 +81,33 @@ class Vision extends React.Component {
 
   render() {
     return (
-      <Grid>
-        <Row>
-          <Col xs={12}>
-            <h3>Vision Analysis</h3>
-          </Col>
-          <Col xs={6}>
-            <img
-              src={this.state.previewImage}
-              style={this.styles.previewImage}
-            />
-            <Uppy
-              XHRUpload={this.XHRUpload}
-              onUppySuccess={this.onUppySuccess}
-            />
-          </Col>
-          <Col xs={6}>
-            {this.generateResultBars(this.state.visionResult)}
-          </Col>
-        </Row>
-      </Grid>
+      <Loadable
+        active={this.state.isLoading}
+        spinner
+        text='Loading ...'
+      >
+        <Grid>
+          <Row>
+            <Col xs={12}>
+              <h3>Vision Analysis</h3>
+            </Col>
+            <Col xs={6}>
+              <img
+                src={this.state.previewImage}
+                style={this.styles.previewImage}
+              />
+              <Uppy
+                XHRUpload={this.XHRUpload}
+                onUppySuccess={this.onUppySuccess}
+                onUpload={this.onUppyUpload}
+              />
+            </Col>
+            <Col xs={6}>
+              {this.generateResultBars(this.state.visionResult)}
+            </Col>
+          </Row>
+        </Grid>
+      </Loadable>
     )
   }
 }

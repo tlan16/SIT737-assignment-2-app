@@ -22,33 +22,11 @@ class MyUppy extends React.Component {
       .use(XHRUpload, this.props.XHRUpload)
 
     this.uppy
-      .on('file-added', (file) => {
-        console.log('Added file', file)
-      })
-      .on('file-removed', (file) => {
-        console.log('Removed file', file)
-      })
       .on('upload', (data) => {
-        console.log(`Upload status`, data)
-      })
-      .on('upload-progress', (file, progress) => {
-        console.log(file.id, progress.bytesUploaded, progress.bytesTotal)
+        this.props.onUpload(this.uppy)
       })
       .on('upload-success', (file, resp, uploadURL) => {
         this.props.onUppySuccess(this.uppy, file)
-        console.log(`Upload successful`, file.name, uploadURL)
-      })
-      .on('complete', (result) => {
-        console.log('successful files:', result.successful)
-        console.log('failed files:', result.failed)
-      })
-      .on('upload-error', (file, error) => {
-        console.log('error with file:', file.id)
-        console.log('error message:', error)
-      })
-      .on('info-visible', () => {
-        const info = this.uppy.getState().info
-        alert(`${info.message} ${info.details}`)
       })
 
     this.uppy.run()

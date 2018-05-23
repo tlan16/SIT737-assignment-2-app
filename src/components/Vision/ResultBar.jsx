@@ -1,6 +1,7 @@
 import React from 'react'
 import {ProgressBar} from 'react-bootstrap'
 import ReactTooltip from 'react-tooltip'
+import Loadable from 'react-loading-overlay'
 import {getSpeech} from "../../services/tts"
 import {translate as Translate} from "../../services/translate"
 import {getAudioElement} from "./AudioPlayer"
@@ -13,6 +14,7 @@ class Bar extends React.Component {
 
   state = {
     label: '',
+    loading: true,
   }
 
   style = {
@@ -20,7 +22,13 @@ class Bar extends React.Component {
   }
 
   onClick = () => {
+    this.setState({
+      loading: true,
+    })
     getSpeech(this.props.label, this.props.voice, res => {
+      this.setState({
+        loading: false,
+      })
       const audio = getAudioElement(JSON.parse(res.text), 'audio/wav')
       audio.play()
     })
@@ -30,6 +38,7 @@ class Bar extends React.Component {
     Translate(this.props.label, this.props.voice.slice(0, 2), res => {
       this.setState({
         label: res.text,
+        loading: false,
       })
     })
   }
@@ -39,16 +48,22 @@ class Bar extends React.Component {
       <span>
         {
           this.state.label.length ? (
-            <ProgressBar
-              now={this.props.now < 1 ? this.props.now * 100 : this.props.now}
-              label={this.state.label}
-              onClick={this.onClick}
-              data-tip={'Click to play!'}
-              style={this.style}
-            />
+            <Loadable
+              active={this.state.loading}
+              spinner
+              text='Loading ...'
+            >
+              <ProgressBar
+                now={this.props.now < 1 ? this.props.now * 100 : this.props.now}
+                label={this.state.label}
+                onClick={this.onClick}
+                data-tip={'Click to play!'}
+                style={this.style}
+              />
+              <ReactTooltip />
+            </Loadable>
           ) : undefined
         }
-        <ReactTooltip />
       </span>
     )
   }

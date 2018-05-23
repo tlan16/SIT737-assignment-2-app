@@ -1,6 +1,7 @@
 import React from 'react'
 import Select from 'react-select'
 import {InputGroup} from 'react-bootstrap'
+import Loadable from 'react-loading-overlay'
 import {codeToName} from '../../helpers/languageCode'
 import {getVoices} from "../../services/tts"
 
@@ -62,13 +63,19 @@ class VoiceSelector extends React.Component {
         <InputGroup.Addon>
           Select a Voice
         </InputGroup.Addon>
-        <Select
-          options={this.state.options}
-          defaultValue={this.state.defaultValue}
-          onChange={this.onchange}
-          isDisabled={this.props.isDisabled}
-          autoFocus={true}
-        />
+        <Loadable
+          active={this.state.options.length === 0}
+          spinner
+          text='Loading ...'
+        >
+          <Select
+            options={this.state.options}
+            defaultValue={this.state.defaultValue}
+            onChange={this.onchange}
+            isDisabled={this.props.isDisabled}
+            autoFocus={true}
+          />
+        </Loadable>
       </InputGroup>
     )
   }
