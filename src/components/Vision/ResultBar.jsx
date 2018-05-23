@@ -25,7 +25,7 @@ class Bar extends React.Component {
     this.setState({
       loading: true,
     })
-    getSpeech(this.props.label, this.props.voice, res => {
+    getSpeech(this.state.label, this.props.voice, res => {
       this.setState({
         loading: false,
       })
