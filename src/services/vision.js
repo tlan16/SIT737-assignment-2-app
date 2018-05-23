@@ -1,6 +1,8 @@
+import {BaseURl} from "./superagent"
+
 export const getUppyXHRUpload = onResponse => (
   {
-    endpoint: `${process.env.API_URL}/vision/label`,
+    endpoint: `${BaseURl}/vision/label`,
     method: 'post',
     formData: true,
     fieldName: 'image',

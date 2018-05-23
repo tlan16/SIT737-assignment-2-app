@@ -1,20 +1,14 @@
 import React from 'react'
 import Select from 'react-select'
-import Request from 'superagent'
 import {InputGroup} from 'react-bootstrap'
 import {codeToName} from '../../helpers/languageCode'
+import {getVoices} from "../../services/tts"
 
 class VoiceSelector extends React.Component {
   constructor() {
     super()
-    this.fetchOptions(res => {
+    getVoices(res => {
       this.setState(this.formatVoiceOptions(res))
-    })
-  }
-
-  fetchOptions(callback) {
-    Request.get(process.env.API_URL + '/text-to-speech/voices', (err, res) => {
-      if (!err && callback instanceof Function) callback(res.body)
     })
   }
 
