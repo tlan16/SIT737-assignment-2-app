@@ -2,6 +2,7 @@ import React from 'react'
 import {ProgressBar} from 'react-bootstrap'
 import ReactTooltip from 'react-tooltip'
 import {getSpeech} from "../../services/tts"
+import {getAudioElement} from "./AudioPlayer"
 
 class Bar extends React.Component {
   style = {
@@ -10,10 +11,7 @@ class Bar extends React.Component {
 
   onClick = () => {
     getSpeech(this.props.label, this.props.voice, res => {
-      const blob = new Blob([new Uint8Array(JSON.parse(res.text))], {type: 'audio/wav'})
-      const url = URL.createObjectURL(blob)
-
-      const audio = new Audio(url)
+      const audio = getAudioElement(JSON.parse(res.text), 'audio/wav')
       audio.play()
     })
   }
