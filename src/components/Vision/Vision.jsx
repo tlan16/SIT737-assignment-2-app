@@ -22,7 +22,7 @@ class Vision extends React.Component {
 
   generateResultBars = (results = []) => {
     const myStyles = {
-      'margin-bottom': '20px',
+      marginBottom: '20px',
     }
 
     return (
