@@ -19,9 +19,14 @@ class Vision extends React.Component {
     }
   })
 
-  static generateResultBars(results = []) {
-    return results.map(result =>
-      <Bar key={result.mid} now={result.score} label={result.description} />
+  generateResultBars = (results = []) => {
+    return results.map(({mid, score, description}) =>
+      <Bar
+        key={mid}
+        now={score}
+        label={description}
+        voice={this.props.voice}
+      />
     )
   }
 
@@ -38,7 +43,7 @@ class Vision extends React.Component {
             />
           </Col>
           <Col xs={6}>
-            {Vision.generateResultBars(this.state.visionResult)}
+            {this.generateResultBars(this.state.visionResult)}
           </Col>
         </Row>
       </Grid>

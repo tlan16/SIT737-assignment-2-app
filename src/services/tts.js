@@ -12,7 +12,8 @@ export const getSpeech = (word, voice, callback) => {
     .query({
       voice,
     })
+    .set('Accept', 'application/octet-stream')
     .then(res => {
-      if (callback instanceof Function) callback(res.body)
+      if (callback instanceof Function) callback(res)
     })
 }
