@@ -14,7 +14,7 @@ class MyUppy extends React.Component {
         maxFileSize: 1000000, // 1MB
         maxNumberOfFiles: 1,
         minNumberOfFiles: 1,
-        allowedFileTypes: ['.jpg', '.jpeg', '.png', '.gif'],
+        allowedFileTypes: ['image/*', '.jpg', '.jpeg', '.png', '.gif'],
       },
     })
 
